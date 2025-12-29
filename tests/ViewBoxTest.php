@@ -1,9 +1,9 @@
 <?php
 
-namespace MapQuery\POI\Tests;
+namespace modryd\MapQuery\Tests;
 
 use PHPUnit\Framework\TestCase;
-use MapQuery\POI\ViewBox;
+use modryd\MapQuery\ViewBox;
 use InvalidArgumentException;
 
 class ViewBoxTest extends TestCase

@@ -1,19 +1,19 @@
 <?php
-
+// https://nominatim.org/release-docs/latest/api/Search/
 require 'vendor/autoload.php';
 
-use MapQuery\POI\POISearcher;
-use MapQuery\POI\ViewBox;
-use MapQuery\POI\Exception\POISearchException;
+use modryd\MapQuery\POISearcher;
+use modryd\MapQuery\ViewBox;
+use modryd\MapQuery\Exception\POISearchException;
 
 try {
     $searcher = new POISearcher();
 
     $viewBox = new ViewBox(14.5, 50.0, 14.6, 50.1);
 
-    $pois = $searcher->searchByViewBox($viewBox, ['amenity' => 'restaurant']);
+    $pois = $searcher->searchByViewBox($viewBox, ['amenity' => 'school']);
 
-    echo "Found " . count($pois) . " restaurants:\n\n";
+    echo "Found " . count($pois) . " POIs:\n\n";
 
     foreach ($pois as $poi) {
         echo "Name: " . ($poi->getName() ?? 'N/A') . "\n";

@@ -1,8 +1,8 @@
 <?php
 
-namespace MapQuery\POI;
+namespace modryd\MapQuery;
 
-interface NominatimClientInterface
+interface POIClientInterface
 {
     public function search(ViewBox $viewBox, array $filters = []): array;
 }

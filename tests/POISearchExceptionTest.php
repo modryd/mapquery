@@ -1,9 +1,9 @@
 <?php
 
-namespace MapQuery\POI\Tests;
+namespace modryd\MapQuery\Tests;
 
 use PHPUnit\Framework\TestCase;
-use MapQuery\POI\Exception\POISearchException;
+use modryd\MapQuery\Exception\POISearchException;
 
 class POISearchExceptionTest extends TestCase
 {

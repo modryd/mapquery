@@ -1,9 +1,9 @@
 <?php
 
-namespace MapQuery\POI\Tests;
+namespace modryd\MapQuery\Tests;
 
 use PHPUnit\Framework\TestCase;
-use MapQuery\POI\POI;
+use modryd\MapQuery\POI;
 
 class POITest extends TestCase
 {

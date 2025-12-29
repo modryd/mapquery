@@ -1,10 +1,10 @@
 <?php
 
-namespace MapQuery\POI;
+namespace modryd\MapQuery;
 
-use MapQuery\POI\Exception\POISearchException;
+use modryd\MapQuery\Exception\POISearchException;
 
-class NominatimClient implements NominatimClientInterface
+class NominatimClient implements POIClientInterface
 {
     private string $baseUrl;
     private string $userAgent;
@@ -12,7 +12,7 @@ class NominatimClient implements NominatimClientInterface
 
     public function __construct(
         string $baseUrl = 'https://nominatim.openstreetmap.org',
-        string $userAgent = 'MapQuery POI Searcher',
+        string $userAgent = 'modryd MapQuery',
         int $timeout = 10
     ) {
         $this->baseUrl = rtrim($baseUrl, '/');

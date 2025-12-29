@@ -5,7 +5,7 @@
          colors="true"
          verbose="true">
     <testsuites>
-        <testsuite name="MapQuery POI Searcher Test Suite">
+        <testsuite name="modryd MapQuery Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

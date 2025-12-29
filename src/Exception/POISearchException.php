@@ -1,6 +1,6 @@
 <?php
 
-namespace MapQuery\POI\Exception;
+namespace modryd\MapQuery\Exception;
 
 class POISearchException extends \Exception
 {

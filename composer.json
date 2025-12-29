@@ -1,10 +1,11 @@
 {
-    "name": "mapquery/poi-searcher",
-    "description": "PHP library for searching Points of Interest (POI) by coordinates using Nominatim API",
+    "name": "modryd/mapquery",
+    "description": "PHP library for searching Points of Interest (POI) by coordinates using Overpass API",
     "type": "library",
     "keywords": [
         "poi",
         "nominatim",
+        "overpass",
         "openstreetmap",
         "geocoding",
         "coordinates",
@@ -15,8 +16,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "MapQuery",
-            "email": "info@mapquery.com"
+            "name": "Daniel Modrý",
+            "email": "github-modryd@podnika.cz"
         }
     ],
     "require": {
@@ -27,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MapQuery\\POI\\": "src/"
+            "modryd\\MapQuery\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MapQuery\\POI\\Tests\\": "tests/"
+            "modryd\\MapQuery\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -40,7 +41,5 @@
         "optimize-autoloader": true
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "version": "1.0.0"
+    "prefer-stable": true
 }
-

@@ -1,6 +1,6 @@
 <?php
 
-namespace MapQuery\POI;
+namespace modryd\MapQuery;
 
 class ViewBox
 {

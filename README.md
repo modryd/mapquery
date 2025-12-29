@@ -1,11 +1,11 @@
-# MapQuery POI Searcher
+# MapQuery
 
-PHP library for searching Points of Interest (POI) by coordinates using Nominatim API.
+PHP library for searching Points of Interest (POI) by coordinates using Overpass API.
 
 ## Installation
 
 ```bash
-composer require mapquery/poi-searcher
+composer require modryd/mapquery
 ```
 
 ## Usage
@@ -17,22 +17,24 @@ composer require mapquery/poi-searcher
 
 require 'vendor/autoload.php';
 
-use MapQuery\POI\POISearcher;
-use MapQuery\POI\ViewBox;
+use modryd\MapQuery\POISearcher;
+use modryd\MapQuery\ViewBox;
 
 $searcher = new POISearcher();
 
 // Create viewbox for Prague area (50°N, 14°E)
 $viewBox = new ViewBox(14.5, 50.0, 14.6, 50.1);
 
-// Search for restaurants
-$pois = $searcher->searchByViewBox($viewBox, ['amenity' => 'restaurant']);
+// Search for all POIs (uses Overpass API - no need to specify amenity)
+$pois = $searcher->searchByViewBox($viewBox);
 
 foreach ($pois as $poi) {
     echo $poi->getName() . " - " . $poi->getDisplayName() . "\n";
-    echo "Coordinates: " . $poi->getLatitude() . ", " . $poi->getLongitude() . "\n\n";
+    echo "Coordinates: " . $poi->getLatitude() . ", " . $poi->getLongitude() . "\n";
+    echo "Type: " . $poi->getType() . "\n\n";
 }
 ```
+
 
 ### Using Coordinates Directly
 
@@ -41,9 +43,10 @@ foreach ($pois as $poi) {
 
 require 'vendor/autoload.php';
 
-use MapQuery\POI\POISearcher;
+use modryd\MapQuery\POISearcher;
 
 $searcher = new POISearcher();
+// or $searcher = new POISearcher(new modryd\MapQuery\NominatimClient());
 
 // Search for cafes in Prague
 $pois = $searcher->searchByCoordinates(
@@ -66,9 +69,9 @@ foreach ($pois as $poi) {
 
 require 'vendor/autoload.php';
 
-use MapQuery\POI\POISearcher;
-use MapQuery\POI\NominatimClient;
-use MapQuery\POI\ViewBox;
+use modryd\MapQuery\POISearcher;
+use modryd\MapQuery\NominatimClient;
+use modryd\MapQuery\ViewBox;
 
 $client = new NominatimClient(
     'https://nominatim.openstreetmap.org',
@@ -94,7 +97,7 @@ Main class for searching POIs.
 
 #### Constructor
 
-- `__construct(?NominatimClientInterface $client = null)` - Optional custom client implementation
+- `__construct(?modryd\MapQuery\POIClientInterface $client = null)` - Optional custom client implementation
 
 ### ViewBox
 
@@ -128,26 +131,43 @@ Represents a single Point of Interest result.
 - `getBoundingBox(): array`
 - `toArray(): array` - Returns POI as associative array
 
-## Filters
+## API Selection
 
-You can pass filters as an associative array. Common filters:
+The library uses **Overpass API** for all searches, which supports both filtered and unfiltered queries:
 
-- `amenity` - Type of amenity (e.g., 'restaurant', 'cafe', 'hotel')
-- `tourism` - Tourism-related POIs
-- `shop` - Shopping-related POIs
+- **No filters (empty array or omitted)**: Returns all POIs (amenity, tourism, shop) in the viewbox
+- **With filters**: Returns only POIs matching the specified filters
 
-See [Nominatim API documentation](https://nominatim.org/release-docs/develop/api/Search/) for full list of available filters.
+### Filters
+
+Overpass API supports filtering by any OpenStreetMap tag. Common filters:
+
+- `amenity` - Type of amenity (e.g., 'restaurant', 'cafe', 'hotel', 'parking')
+- `tourism` - Tourism-related POIs (e.g., 'hotel', 'attraction', 'museum')
+- `shop` - Shopping-related POIs (e.g., 'supermarket', 'bakery', 'clothes')
+
+Example with filters:
+
+```php
+// Search for restaurants only
+$pois = $searcher->searchByViewBox($viewBox, ['amenity' => 'restaurant']);
+
+// Search for supermarkets
+$pois = $searcher->searchByViewBox($viewBox, ['shop' => 'supermarket']);
+```
+
+See [Overpass API documentation](https://wiki.openstreetmap.org/wiki/Overpass_API) for more information about filtering.
 
 ## Error Handling
 
-The library throws `MapQuery\POI\Exception\POISearchException` in case of errors:
+The library throws `modryd\MapQuery\Exception\POISearchException` in case of errors:
 
 ```php
 <?php
 
-use MapQuery\POI\POISearcher;
-use MapQuery\POI\ViewBox;
-use MapQuery\POI\Exception\POISearchException;
+use modryd\MapQuery\POISearcher;
+use modryd\MapQuery\ViewBox;
+use modryd\MapQuery\Exception\POISearchException;
 
 try {
     $searcher = new POISearcher();

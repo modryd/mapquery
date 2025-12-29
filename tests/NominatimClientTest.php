@@ -1,11 +1,11 @@
 <?php
 
-namespace MapQuery\POI\Tests;
+namespace modryd\MapQuery\Tests;
 
 use PHPUnit\Framework\TestCase;
-use MapQuery\POI\NominatimClient;
-use MapQuery\POI\ViewBox;
-use MapQuery\POI\Exception\POISearchException;
+use modryd\MapQuery\NominatimClient;
+use modryd\MapQuery\ViewBox;
+use modryd\MapQuery\Exception\POISearchException;
 
 class NominatimClientTest extends TestCase
 {

@@ -8,20 +8,39 @@
 
 ## Building the Package
 
-### 1. Validate composer.json
+### Quick Build (Recommended)
+
+Use the build script to run tests and create the package:
+
+**Linux/Mac/Cross-platform:**
+```bash
+php build.php
+```
+
+The script will:
+1. Run all tests
+2. Validate composer.json
+3. Generate optimized autoload files
+4. Create package archive in `dist/` directory
+
+### Manual Build
+
+If you prefer to build manually:
+
+#### 1. Validate composer.json
 
 ```bash
 composer validate
 ```
 
-### 2. Run Tests
+#### 2. Run Tests
 
 ```bash
 composer install
 vendor/bin/phpunit
 ```
 
-### 3. Create Archive
+#### 3. Create Archive
 
 ```bash
 composer archive --format=zip --dir=dist
@@ -67,23 +86,26 @@ Excluded from package (via .gitattributes):
 To install the package locally from the archive:
 
 ```bash
-composer require mapquery/poi-searcher:dev-master --prefer-source
+composer require modryd/mapquery:dev-master --prefer-source
 ```
 
 Or from a local path:
 
 ```bash
-composer require mapquery/poi-searcher:@dev --prefer-source
+composer require modryd/mapquery:@dev --prefer-source
 ```
 
 ## Version Management
 
 The package uses semantic versioning (MAJOR.MINOR.PATCH).
 
+**Important:** For Packagist, the version is determined by Git tags, not by the `version` field in `composer.json` (Packagist ignores that field).
+
 To release a new version:
-1. Update version in `composer.json`
-2. Update `CHANGELOG.md`
-3. Create Git tag
-4. Build archive
-5. Publish to Packagist
+1. Update `CHANGELOG.md` with the new version and changes
+2. Commit all changes
+3. Create Git tag: `git tag -a v1.0.1 -m "Release version 1.0.1"`
+4. Push tag: `git push origin v1.0.1`
+5. Build archive using `php build.php`
+6. Publish to Packagist (Packagist will automatically detect the new tag)
 

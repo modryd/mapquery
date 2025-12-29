@@ -1,14 +1,14 @@
 <?php
 
-namespace MapQuery\POI\Tests;
+namespace modryd\MapQuery\Tests;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use MapQuery\POI\POISearcher;
-use MapQuery\POI\NominatimClientInterface;
-use MapQuery\POI\ViewBox;
-use MapQuery\POI\POI;
-use MapQuery\POI\Exception\POISearchException;
+use modryd\MapQuery\POISearcher;
+use modryd\MapQuery\POIClientInterface;
+use modryd\MapQuery\ViewBox;
+use modryd\MapQuery\POI;
+use modryd\MapQuery\Exception\POISearchException;
 
 class POISearcherTest extends TestCase
 {
@@ -21,7 +21,7 @@ class POISearcherTest extends TestCase
 
     public function testConstructorWithCustomClient(): void
     {
-        $client = $this->createMock(NominatimClientInterface::class);
+        $client = $this->createMock(POIClientInterface::class);
         $searcher = new POISearcher($client);
 
         $this->assertInstanceOf(POISearcher::class, $searcher);
@@ -42,7 +42,7 @@ class POISearcherTest extends TestCase
             ]
         ];
 
-        $client = $this->createMock(NominatimClientInterface::class);
+        $client = $this->createMock(POIClientInterface::class);
         $client->expects($this->once())
             ->method('search')
             ->willReturn($mockData);
@@ -59,7 +59,7 @@ class POISearcherTest extends TestCase
 
     public function testSearchByViewBoxWithEmptyResults(): void
     {
-        $client = $this->createMock(NominatimClientInterface::class);
+        $client = $this->createMock(POIClientInterface::class);
         $client->expects($this->once())
             ->method('search')
             ->willReturn([]);
@@ -92,7 +92,7 @@ class POISearcherTest extends TestCase
             ]
         ];
 
-        $client = $this->createMock(NominatimClientInterface::class);
+        $client = $this->createMock(POIClientInterface::class);
         $client->expects($this->once())
             ->method('search')
             ->willReturn($mockData);
@@ -119,7 +119,7 @@ class POISearcherTest extends TestCase
             ]
         ];
 
-        $client = $this->createMock(NominatimClientInterface::class);
+        $client = $this->createMock(POIClientInterface::class);
         $client->expects($this->once())
             ->method('search')
             ->willReturn($mockData);
@@ -134,7 +134,7 @@ class POISearcherTest extends TestCase
 
     public function testSearchByViewBoxThrowsPOISearchException(): void
     {
-        $client = $this->createMock(NominatimClientInterface::class);
+        $client = $this->createMock(POIClientInterface::class);
         $client->expects($this->once())
             ->method('search')
             ->willThrowException(new POISearchException('API Error'));
@@ -150,7 +150,7 @@ class POISearcherTest extends TestCase
 
     public function testSearchByViewBoxHandlesUnexpectedException(): void
     {
-        $client = $this->createMock(NominatimClientInterface::class);
+        $client = $this->createMock(POIClientInterface::class);
         $client->expects($this->once())
             ->method('search')
             ->willThrowException(new \RuntimeException('Unexpected error'));
@@ -178,7 +178,7 @@ class POISearcherTest extends TestCase
             123
         ];
 
-        $client = $this->createMock(NominatimClientInterface::class);
+        $client = $this->createMock(POIClientInterface::class);
         $client->expects($this->once())
             ->method('search')
             ->willReturn($mockData);

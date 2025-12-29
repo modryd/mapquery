@@ -1,16 +1,16 @@
 <?php
 
-namespace MapQuery\POI;
+namespace modryd\MapQuery;
 
-use MapQuery\POI\Exception\POISearchException;
+use modryd\MapQuery\Exception\POISearchException;
 
 class POISearcher
 {
-    private NominatimClientInterface $client;
+    private POIClientInterface $client;
 
-    public function __construct(?NominatimClientInterface $client = null)
+    public function __construct(?POIClientInterface $client = null)
     {
-        $this->client = $client ?? new NominatimClient();
+        $this->client = $client ?? new OverpassClient();
     }
 
     public function searchByViewBox(ViewBox $viewBox, array $filters = []): array
