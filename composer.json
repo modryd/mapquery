@@ -1,0 +1,46 @@
+{
+    "name": "mapquery/poi-searcher",
+    "description": "PHP library for searching Points of Interest (POI) by coordinates using Nominatim API",
+    "type": "library",
+    "keywords": [
+        "poi",
+        "nominatim",
+        "openstreetmap",
+        "geocoding",
+        "coordinates",
+        "search",
+        "map",
+        "location"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "MapQuery",
+            "email": "info@mapquery.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5|^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MapQuery\\POI\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MapQuery\\POI\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "version": "1.0.0"
+}
+
